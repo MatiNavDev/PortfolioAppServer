@@ -6,9 +6,9 @@ const rollbar = new Rollbar({
   captureUnhandledRejections: true
 });
 
-// record a generic message and send it to Rollbar
-const logInRollbar = msg => rollbar.log(msg);
+// save an error message in Rollbar
+const logErrorInRollbar = msg => rollbar.error(msg);
 
 module.exports = {
-  logInRollbar
+  logErrorInRollbar
 };

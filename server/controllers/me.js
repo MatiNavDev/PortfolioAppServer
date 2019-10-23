@@ -1,10 +1,13 @@
-const { logInRollbar } = require('../helpers/rollbar');
+const { CollectionsFactory, classes } = require('../db/CollectionsFactory');
+const { handleCommonError, handleCommonResponse } = require('../helpers/responses');
 
-const getTopics = (req, res) => {
+const getTopics = async (req, res) => {
   try {
-    res.send({ ok: 'ok' });
+    const Topic = new CollectionsFactory(classes.TOPIC);
+    const topics = await Topic.find();
+    handleCommonResponse(res, { topics });
   } catch (error) {
-    logInRollbar(error.message);
+    handleCommonError(res, error);
   }
 };
 
